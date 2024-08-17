@@ -1,0 +1,7 @@
+.dockerignore
+.git
+.vscode
+__pycache__
+*.pyc
+README.md
+docker-build.sh
