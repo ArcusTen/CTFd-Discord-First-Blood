@@ -1,5 +1,5 @@
-FROM python:3.9-slim-bullseye
-# FROM python:3.8-alpine3.19
+# FROM python:3.11-slim-bullseye
+FROM python:3.8-alpine3.19
 
 WORKDIR /app
 
