@@ -36,3 +36,10 @@ docker commit <container-id> <image-name-to-be-created>:<tag>
 
 Please keep in mind that I am not an expert when it comes to making Discord bots. If you find any issues in this code or want to contribute, please fork the repository and submit a pull request with any improvements.
 
+## Previews
+
+For First Blood (with gif & without gif):
+![screenshot1](assets/screenshot1.png)
+
+For Solves (with gif & without gif):
+![screenshot2](assets/screenshot2.png)
