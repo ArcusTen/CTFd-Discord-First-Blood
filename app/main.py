@@ -13,6 +13,8 @@ CTFD_API_URL = os.getenv('CTF_URL')
 CTFD_API_KEY = os.getenv('CTFD_API_KEY')
 WEBHOOKS = json.loads(os.getenv('DISCORD_WEBHOOKS'))
 USE_GIF = os.getenv('USE_GIF', 'False').lower() == 'true'  # Convert to boolean
+FIRST_BLOOD_GIF = os.getenv('FIRST_BLOOD_GIF')
+SOLVE_GIF = os.getenv('SOLVE_GIF')
 
 firstBloods = {}
 solvedChallenges = set()
@@ -38,8 +40,8 @@ async def announceFirstBlood(challenge_name, user_name, team_name):
         description=f"**{user_name}** from team **{team_name}** got the first blood on `{challenge_name}`!",
         color=0xFF1100
     )
-    if USE_GIF: 
-        embed.set_image(url='https://media3.giphy.com/media/5jB3XIHniOQJYAvQKP/giphy.gif')
+    if USE_GIF and FIRST_BLOOD_GIF:
+        embed.set_image(url=FIRST_BLOOD_GIF)
     await sendWebhook(WEBHOOKS['first_blood'], embed)
 
 async def announceSolve(challenge_name, user_name, team_name):
@@ -48,8 +50,8 @@ async def announceSolve(challenge_name, user_name, team_name):
         description=f"**{user_name}** from team **{team_name}** solved `{challenge_name}`.",
         color=0x38E099
     )
-    if USE_GIF: 
-        embed.set_image(url='https://media3.giphy.com/media/t5PkP22ZUskJdkTj0k/giphy.gif')
+    if USE_GIF and SOLVE_GIF: 
+        embed.set_image(url=SOLVE_GIF)
     await sendWebhook(WEBHOOKS['solves'], embed)
 
 async def getUserDetails(user_id):
@@ -81,7 +83,7 @@ async def announceEvents():
         for solve in solve_data:
             team_name = solve.get('name', 'Unknown User')
             user_id = solve.get('account_id')
-            # Incrementing user_id by 1 as admin user has id of 0 which is disturbing the sequence feel free to remove +1 if your setup is fine without it.
+            # Incrementing user_id by 1 as admin user has id of 0 which is disturbing the sequence. Feel free to remove +1 if your setup is fine without it.
             user_details = await getUserDetails(user_id + 1)
             user_name = user_details['name'] if user_details else 'Unknown User'
             
